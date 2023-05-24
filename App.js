@@ -27,6 +27,8 @@ export default function App() {
       <FlatList
         data={posters}
         key={(_, index) => index.toString}
+        horizontal
+        pagingEnabled
         renderItem={({ item: poster }) => (
           <Image
             source={poster}
