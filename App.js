@@ -43,9 +43,10 @@ export default function App() {
             <Animated.Image
               source={poster}
               key={`backdrop-${index}`}
-              style={
-                ([StyleSheet.absoluteFillObject], { opacity, width, height })
-              }
+              style={[
+                StyleSheet.absoluteFillObject,
+                { opacity, width, height }
+              ]}
               blurRadius={42}
             />
           )
