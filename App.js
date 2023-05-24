@@ -24,6 +24,15 @@ export default function App() {
   return (
     <View style={{ flex: 1, backgroundColor: "black" }}>
       <StatusBar hidden />
+      <View style={StyleSheet.absoluteFillObject}>
+        {posters.map((poster, index) => (
+          <Image
+            source={poster}
+            key={`backdrop-${index}`}
+            style={StyleSheet.absoluteFillObject}
+          />
+        ))}
+      </View>
       <FlatList
         data={posters}
         key={(_, index) => index.toString}
