@@ -1,5 +1,7 @@
 import { StatusBar } from "expo-status-bar"
+import { useRef } from "react"
 import {
+  Animated,
   Dimensions,
   FlatList,
   Image,
@@ -21,19 +23,39 @@ const imageWidth = width * 0.7
 const imageHeight = height * 0.5
 
 export default function App() {
+  const scrollX = useRef(new Animated.Value(0)).current
+
   return (
     <View style={{ flex: 1, backgroundColor: "black" }}>
       <StatusBar hidden />
-      <View style={StyleSheet.absoluteFillObject}>
-        {posters.map((poster, index) => (
-          <Image
-            source={poster}
-            key={`backdrop-${index}`}
-            style={StyleSheet.absoluteFillObject}
-          />
-        ))}
+      <View style={[StyleSheet.absoluteFillObject]}>
+        {posters.map((poster, index) => {
+          const inputRange = [
+            (index - 1) * width,
+            index * width,
+            (index + 1) * width
+          ]
+          const opacity = scrollX.interpolate({
+            inputRange,
+            outputRange: [0, 1, 0]
+          })
+          return (
+            <Animated.Image
+              source={poster}
+              key={`backdrop-${index}`}
+              style={
+                ([StyleSheet.absoluteFillObject], { opacity, width, height })
+              }
+              blurRadius={42}
+            />
+          )
+        })}
       </View>
-      <FlatList
+      <Animated.FlatList
+        onScroll={Animated.event(
+          [{ nativeEvent: { contentOffset: { x: scrollX } } }],
+          { useNativeDriver: true }
+        )}
         data={posters}
         key={(_, index) => index.toString}
         horizontal
