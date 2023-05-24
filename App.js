@@ -27,7 +27,7 @@ export default function App() {
 
   return (
     <View style={{ flex: 1, backgroundColor: "black" }}>
-      <StatusBar hidden />
+      <StatusBar style="light" />
       <View style={[StyleSheet.absoluteFillObject]}>
         {posters.map((poster, index) => {
           const inputRange = [
