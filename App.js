@@ -18,7 +18,7 @@ const posters = [
 
 const { width, height } = Dimensions.get("screen")
 const imageWidth = width * 0.7
-const imageHeight = height * 1.54
+const imageHeight = height * 0.5
 
 export default function App() {
   return (
@@ -30,14 +30,23 @@ export default function App() {
         horizontal
         pagingEnabled
         renderItem={({ item: poster }) => (
-          <Image
-            source={poster}
+          <View
             style={{
-              width: imageWidth,
-              height: imageWidth,
-              resizeMode: "cover"
+              width,
+              justifyContent: "center",
+              alignItems: "center"
             }}
-          />
+          >
+            <Image
+              source={poster}
+              style={{
+                width: imageWidth,
+                height: imageHeight,
+                resizeMode: "cover",
+                borderRadius: 28
+              }}
+            />
+          </View>
         )}
       />
     </View>
